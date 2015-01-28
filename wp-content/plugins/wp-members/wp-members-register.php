@@ -6,13 +6,13 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2014 Chad Butler
+ * Copyright (c) 2006-2015 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WordPress
  * @subpackage WP-Members
  * @author Chad Butler
- * @copyright 2006-2014
+ * @copyright 2006-2015
  *
  * Functions Included:
  * * wpmem_registration
@@ -108,7 +108,6 @@ function wpmem_registration( $toggle )
 			
 		} else {
 			if( !$fields['username'] ) { $wpmem_themsg = __( 'Sorry, username is a required field', 'wp-members' ); return $wpmem_themsg; exit(); } 
-			if( !preg_match("/^[a-z]{3}\d{3}$/", $fields['username'])) { $wpmem_themsg = __( 'Het opgegeven VU-net-ID is niet geldig', 'wp-members' ); return $wpmem_themsg; exit(); }
 			if( !validate_username( $fields['username'] ) ) { $wpmem_themsg = __( 'The username cannot include non-alphanumeric characters.', 'wp-members' ); return $wpmem_themsg; exit(); }
 			if( !is_email( $fields['user_email']) ) { $wpmem_themsg = __( 'You must enter a valid email address.', 'wp-members' ); return $wpmem_themsg; exit(); }
 			if( username_exists( $fields['username'] ) ) { return "user"; exit(); } 

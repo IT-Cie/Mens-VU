@@ -6,13 +6,13 @@
  * 
  * This file is part of the WP-Members plugin by Chad Butler
  * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2014 Chad Butler
+ * Copyright (c) 2006-2015 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WordPress
  * @subpackage WP-Members
  * @author Chad Butler
- * @copyright 2006-2014
+ * @copyright 2006-2015
  *
  * Functions Included:
  * * wpmem_inc_status
@@ -27,12 +27,12 @@ if( ! function_exists( 'wpmem_inc_status' ) ):
  *
  * @since 1.8
  *
- * @global $current_user
+ * @global $user_login
  * @return string $status
  */
 function wpmem_inc_status()
 {
-	global $current_user;
+	global $user_login;
 	
 	/**
 	 * Filter the logout link.
@@ -43,7 +43,7 @@ function wpmem_inc_status()
 	 */
 	$logout = apply_filters( 'wpmem_logout_link', $url . '/?a=logout' );
 
-	$status = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $current_user->display_name )
+	$status = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login )
 		. ' | <a href="' . $logout . '">' . __( 'click to log out', 'wp-members' ) . '</a></p>';
 
 	return $status;
@@ -115,7 +115,7 @@ function wpmem_do_sidebar()
 			
 			// messages
 			'error_msg'  => __( 'Login Failed!<br />You entered an invalid username or password.', 'wp-members' ),
-			'status_msg' => __( 'Je bent niet ingelogd.', 'wp-members' ) . '<br />',
+			'status_msg' => __( 'You are not logged in.', 'wp-members' ) . '<br />',
 			
 			// other
 			'strip_breaks'    => true,
@@ -138,7 +138,7 @@ function wpmem_do_sidebar()
 		
 		$form = '';
 		
-		$label = '<label for="username">' . __( 'VU-net-ID' ) . '</label>';
+		$label = '<label for="username">' . __( 'Username' ) . '</label>';
 		$input = '<input type="text" name="log" class="username" id="username" />';
 		
 		$input = ( $wrap_inputs ) ? $inputs_before . $input . $inputs_after : $input;
@@ -232,7 +232,7 @@ function wpmem_do_sidebar()
 
 	} else { 
 	
-		global $current_user; 
+		global $user_login; 
 		
 		/**
 		 * Filter the sidebar logout link.
@@ -243,7 +243,7 @@ function wpmem_do_sidebar()
 		 */
 		$logout = apply_filters( 'wpmem_logout_link', $url . '/?a=logout' );
 		
-		$str = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $current_user->display_name ) . '<br />
+		$str = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login ) . '<br />
 		  <a href="' . $logout . '">' . __( 'click here to log out', 'wp-members' ) . '</a></p>';
 		
 		/**
