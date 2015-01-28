@@ -1,0 +1,179 @@
+/*
+ Theme Name:    Koek en Koffie!
+ Description:    Een wordpress child theme, voor u gemaakt door de bazen der IT-Cie
+ Author:         IT-Cie
+ Template:       twentythirteen
+ Version:       1.0.0.0.126.1.1337.half-automatisch(beta)
+*/
+
+@import url('../twentythirteen/style.css');
+
+/* Remove white bar on mobile devices */
+body {overflow-x: hidden;}
+
+/* css for the to top button that appears when you scroll down. */
+#toTop {
+	position: fixed;
+	bottom: 10%;
+	right: 10%;
+	display: none;
+	z-index: 1;
+}
+
+/* css for the logo in the header. */
+img.alignlogo {
+	position: relative;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+	/* max-width: 735px; */
+}
+
+/* Override the min-height: 230px; from the parent theme css. */
+.site-header .home-link {
+	min-height: 0;
+}
+
+/* Make background transparent to see the slides behind it. */
+.site {
+	background-color: transparent;
+}
+
+/* Give .site-main a background color, which it no longer has because it first had the .site background. */
+.site-main {
+	background-color: #fff;
+}
+
+/* css for slider in header */
+.rslides {
+  position: absolute;
+  z-index: -1;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }
+
+
+/* Navigation bar background */
+.navbar {
+	background-color: rgb(235, 233, 222);
+	}
+
+/* Widgets background */
+.widget {
+	background-color: rgba(235, 233, 222, 0.7);
+	}
+
+/* Navigation bar items background on hover */
+.nav-menu li:hover > a,
+.nav-menu li a:hover,
+.nav-menu li:focus > a,
+.nav-menu li a:focus {
+	background-color: rgb(19, 18, 13);
+	}
+
+/* Navigation bar drop down menu background */
+.nav-menu .sub-menu,
+.nav-menu .children {
+	background-color: rgb(19, 18, 13);
+	}
+
+/* Navigation bar drop down menu background on hover */
+ul.nav-menu ul a:hover,
+.nav-menu ul ul a:hover,
+ul.nav-menu ul a:focus,
+.nav-menu ul ul a:focus {
+	background-color: rgb(188, 54, 10);
+	}
+
+/* Entry title color on hover */
+.entry-title a:hover {
+	color: rgb(188, 54, 10);
+	}
+
+/* Entry link color on hover */
+.entry-content a:hover,
+.comment-content a:hover {
+	color: rgb(188, 54, 10);
+	}
+
+/* Video post background */
+.format-video {
+	background-color: rgb(188, 54, 10);
+	}
+
+/* Video post title hover color */
+.format-video .entry-title a:hover {
+	color: #fff
+	}
+
+/* Widget link color on hover */
+.widget a:hover {
+	color: rgb(188, 54, 10);
+	}
+
+/* Make current page in menu bold */
+.nav-menu .current_page_item > a,
+.nav-menu .current_page_ancestor > a,
+.nav-menu .current-menu-item > a,
+.nav-menu .current-menu-ancestor > a {
+	font-weight: bold;
+	}
+
+/* Paging navigation same color as navbar */
+.paging-navigation {
+	background-color: rgb(235, 233, 222);
+	}
+
+/* Paging navigation color */
+.paging-navigation .meta-nav {
+	background-color: rgb(188, 54, 10);
+	}
+
+/* Paging navigation button hover color */
+.paging-navigation a:hover .meta-nav {
+	background-color: rgb(188, 54, 10);
+}
+
+/* Paging navigation text hover color */
+.navigation a:hover {
+	color: rgb(188, 54, 10);
+	text-decoration: underline;
+}
+
+/* Footer same color as navbar */
+.site-footer {
+	background-color: rgb(235, 233, 222);
+	}
+
+/* Footer bar background color */
+.site-footer .sidebar-container {
+	background-color: rgb(19, 18, 13);
+	}

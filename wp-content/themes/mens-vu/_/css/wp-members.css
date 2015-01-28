@@ -1,0 +1,111 @@
+/**
+ * WP-Members CSS
+ *
+ * CSS for the WP-Members plugin using TwentyTen Theme
+ * 
+ * This file is part of the WP-Members plugin by Chad Butler
+ * You can find out more about this plugin at http://rocketgeek.com
+ * Copyright (c) 2006-2012 Chad Butler (email : plugins@butlerblog.com)
+ * WP-Members(tm) is a trademark of butlerblog.com
+ *
+ * @package WordPress
+ * @subpackage WP-Members
+ * @author Chad Butler 
+ * @copyright 2006-2012
+ */
+
+/*	
+This stylesheet is designed to integrate WP-Members with the TwentyTen theme.
+There are quite a few examples in here of what you can do with the table-less 
+forms.  You can build off of this or start from scratch and setyour own 
+custom css for the plugin (set the location in the admin panel).
+
+See http://rocketgeek.com/tips-and-tricks/setting-up-a-custom-wp-members-stylesheet/
+for information on how to set up the plugin with a cusotm stylesheet.
+
+For information how to load custom stylesheets with wp_enqueue_style,
+see http://rocketgeek.com/tips-and-tricks/load-a-custom-stylesheet/
+*/
+
+/* Sidebar Login Widget */
+
+#wp-members  { margin-top: -16px; font-size: 11px; color: #666; font-family: 'Segoe UI', Arial, Sans-Serif; margin-bottom: -3px }
+#wp-members .input-prepend { margin-bottom: 5px; }
+#wp-members .input-prepend::before, #wp-members .input-prepend::after {
+	display: table;
+	content: "";
+}
+#wp-members .input-prepend::after {
+	clear: both;
+}
+#wp-members .input-prepend .add-on, #wp-members .input-append .add-on {
+	float: left;
+	display: block;
+	width: auto;
+	min-width: 16px;
+	height: 18px;
+	margin-right: -1px;
+	padding: 5px 7px;
+	text-align: center;
+}
+#wp-members .icon-user {
+	background-position: -168px 0;
+}
+#wp-members .icon-lock {
+	background-position: -287px -24px;
+}
+#wp-members [class^="icon-"], #wp-members [class*=" icon-"] {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("../img/glyphicons-halflings.png");
+	background-repeat: no-repeat;
+}
+#wp-members .input-prepend input, #wp-members .input-prepend .uneditable-input {
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+}
+#wp-members label { color: #000; }
+#wp-members .div_text { padding-top: 4px; }
+#wp-members .username, #wp-members .password {
+	width: 180px;
+	padding: 4px 5px 4px 5px;
+}
+#wp-members .input-prepend input:focus, #wp-members .input-prepend .uneditable-input:focus { position: relative; z-index: 2; }
+#wp-members input[class*="span"], #wp-members select[class*="span"], #wp-members textarea[class*="span"], #wp-members .uneditable-input {
+	float: none;
+	margin-left: 0;
+}
+#wp-members .placeholder {
+	font-family: 'Segoe UI', Arial, Sans-Serif;
+	font-size: 12px;
+}
+#wp-members input, #wp-members textarea, #wp-members select, #wp-members .uneditable-input {
+	display: inline-block;
+	border: 0px solid #CCC;
+}
+#wp-members .button_div { margin-top:6px; margin-left:12px; }
+#wp-members .buttons {
+	background: #e3e3db;
+	font-size:10px; 
+	color: #000; 
+	margin-left: 0px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #fff #d8d8d0 #d8d8d0 #fff;
+	text-decoration: none;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+#wp-members .err {
+	padding: 5px;
+	background-color: #454343;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+	margin: 12px 0 7px 0;
+	color: white;
+}
