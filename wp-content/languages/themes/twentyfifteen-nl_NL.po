@@ -2,13 +2,17 @@
 # This file is distributed under the same license as the Twenty Fifteen package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-12-17 19:59:41+0000\n"
+"PO-Revision-Date: 2015-04-17 06:16:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/1.0-alpha-1000\n"
 "Project-Id-Version: Twenty Fifteen\n"
+
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentyfifteen/"
+msgstr "https://wordpress.org/themes/twentyfifteen/"
 
 #: single.php:37
 msgid "Previous post:"
@@ -18,7 +22,7 @@ msgstr "Vorig bericht:"
 msgid "Next post:"
 msgstr "Volgend bericht:"
 
-#: inc/customizer.php:52 inc/customizer.php:68 inc/customizer.php:73
+#: inc/customizer.php:47 inc/customizer.php:63 inc/customizer.php:68
 msgid "Applied to the header on small screens and the sidebar on wide screens."
 msgstr "Van toepassing op de koptekst op kleine schermen en op de sidebar voor brede schermen."
 
@@ -29,6 +33,26 @@ msgstr "Vorige"
 #: single.php:33
 msgid "Next"
 msgstr "Volgende"
+
+#. Description of the plugin/theme
+msgid "Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer."
+msgstr "Het 2015 standaardthema is schoon, blog-gefocust en ontworpen voor helderheid. Twenty Fifteen is heeft een eenvoudig en duidelijk typografie zodat het leesbaar is op een grote verscheidenheid van schermbreedtes. Het thema biedt ondersteuning voor meerdere talen. Het is ontworpen met de gedachte dat mobiel voorop staat, dit betekent dat de inhoud het meest belangrijk is ongeacht dat bezoekers op je site komen via een smartphone, tablet, laptop of desktop computer."
+
+#: inc/back-compat.php:37 inc/back-compat.php:47 inc/back-compat.php:60
+msgid "Twenty Fifteen requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Fifteen vereist minimaal WordPress-versie 4.1. Je maakt momenteel gebruik van versie %s. Graag WordPress bijwerken en opnieuw proberen."
+
+#: inc/customizer.php:46
+msgid "Header and Sidebar Text Color"
+msgstr "Tekstkleur koptekst en sidebar"
+
+#: inc/customizer.php:31
+msgid "Base Color Scheme"
+msgstr "Standaardkleurschema"
+
+#: inc/customizer.php:62
+msgid "Header and Sidebar Background Color"
+msgstr "Achtergrondkleur koptekst en sidebar"
 
 #: inc/template-tags.php:91 inc/template-tags.php:99
 msgctxt "Used between list items, there is a space after the comma."
@@ -67,33 +91,29 @@ msgstr "Zoekresultaten voor: %s"
 msgid "the WordPress team"
 msgstr "het WordPress-team"
 
-#: inc/customizer.php:152
+#: inc/customizer.php:147
 msgid "Blue"
 msgstr "Blauw"
 
-#: inc/customizer.php:141
+#: inc/customizer.php:136
 msgid "Purple"
 msgstr "Paars"
 
-#: inc/customizer.php:130
+#: inc/customizer.php:125
 msgid "Pink"
 msgstr "Roze"
 
-#: inc/customizer.php:108
+#: inc/customizer.php:103
 msgid "Dark"
 msgstr "Donker"
 
-#: inc/customizer.php:119
+#: inc/customizer.php:114
 msgid "Yellow"
 msgstr "Geel"
 
-#: inc/customizer.php:97
+#: inc/customizer.php:92
 msgid "Default"
 msgstr "Standaard"
-
-#. Theme URI of the plugin/theme
-msgid "https://wordpress.org/themes/twentyfifteen"
-msgstr "https://wordpress.org/themes/twentyfifteen"
 
 #. Theme Name of the plugin/theme
 msgid "Twenty Fifteen"
@@ -121,10 +141,6 @@ msgstr "Nieuwere reacties"
 msgid "Featured"
 msgstr "Uitgelicht"
 
-#: inc/back-compat.php:37 inc/back-compat.php:47 inc/back-compat.php:60
-msgid "Twenty Fifteen requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
-msgstr "Twenty Fifteen vereist minimaal WordPress versie 4.1. Je maakt momenteel gebruik van versie %s. Graag WordPress bijwerken en opnieuw proberen."
-
 #: inc/template-tags.php:76
 msgctxt "Used before publish date."
 msgid "Posted on"
@@ -145,7 +161,7 @@ msgctxt "Used before category names."
 msgid "Categories"
 msgstr "Categorieën"
 
-#: header.php:44
+#: header.php:43
 msgid "Menu and widgets"
 msgstr "Menu en widgets"
 
@@ -154,21 +170,45 @@ msgctxt "Used before post format."
 msgid "Format"
 msgstr "Format"
 
-#: inc/customizer.php:67
-msgid "Header and Sidebar Background Color"
-msgstr "Koptekst en sidebar achtergrondkleur"
+#: content-none.php:31
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Het lijkt erop dat wij niet kunnen vinden wat jij zoekt. Wellicht helpt de zoekfunctie."
 
-#: inc/customizer.php:36
-msgid "Base Color Scheme"
-msgstr "Standaard kleurschema"
+#: functions.php:86
+msgid "Social Links Menu"
+msgstr "Socialelinksmenu"
 
-#: inc/customizer.php:51
-msgid "Header and Sidebar Text Color"
-msgstr "Koptekst en sidebar tekstkleur"
+#: functions.php:85
+msgid "Primary Menu"
+msgstr "Hoofdmenu"
 
-#. Description of the plugin/theme
-msgid "Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer."
-msgstr "Het 2015 standaard thema is schoon, blog-gefocust en ontworpen voor helderheid. Twenty Fifteen is heeft een eenvoudig en duidelijk typografie zodat het leesbaar is op een grote verscheidenheid van schermbreedtes. Het thema biedt ondersteuning voor meerdere talen. Het is ontworpen met de gedachte dat mobiel voorop staat, dit betekend dat de inhoud het meest belangrijk is ongeacht dat bezoekers op je site komen via een smartphone, tablet, laptop of desktop computer."
+#: functions.php:133
+msgid "Widget Area"
+msgstr "Widgetruimte"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Noto Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:161
+msgctxt "Noto Sans font: on or off"
+msgid "on"
+msgstr "on"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Noto Serif, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:169
+msgctxt "Noto Serif font: on or off"
+msgid "on"
+msgstr "on"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:177
+msgctxt "Inconsolata font: on or off"
+msgid "on"
+msgstr "on"
 
 #: comments.php:53
 msgid "Comments are closed."
@@ -187,11 +227,7 @@ msgstr "Bewerken"
 msgid "Proudly powered by %s"
 msgstr "Ondersteund door %s"
 
-#: functions.php:85
-msgid "Primary Menu"
-msgstr "Primair menu"
-
-#: header.php:27
+#: header.php:26
 msgid "Skip to content"
 msgstr "Naar de inhoud springen"
 
@@ -207,34 +243,6 @@ msgstr "Klaar om je eerste bericht te publiceren? <a href=\"%1$s\">Start hier</a
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr "Helaas, er waren geen overeenkomsten met jouw zoekterm. Probeer het opnieuw met enkele andere zoekwoorden."
 
-#: content-none.php:31
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Het lijkt erop dat wij niet kunnen vinden wat jij zoekt. Wellicht dat de zoekfunctie helpt."
-
-#. translators: If there are characters in your language that are not supported
-#. by Inconsolata, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:168
-msgctxt "Inconsolata font: on or off"
-msgid "on"
-msgstr "aan"
-
-#. translators: If there are characters in your language that are not supported
-#. by Noto Sans, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:158
-msgctxt "Noto Sans font: on or off"
-msgid "on"
-msgstr "aan"
-
-#. translators: If there are characters in your language that are not supported
-#. by Noto Serif, translate this to 'off'. Do not translate into your own
-#. language.
-#: functions.php:163
-msgctxt "Noto Serif font: on or off"
-msgid "on"
-msgstr "aan"
-
 #. translators: %s: Name of current post
 #: content-link.php:31 content.php:33 inc/template-tags.php:237
 msgid "Continue reading %s"
@@ -247,22 +255,18 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] "Een gedachte over &ldquo;%2$s&rdquo;"
 msgstr[1] "%1$s gedachten over &ldquo;%2$s&rdquo;"
 
-#: functions.php:133
-msgid "Widget Area"
-msgstr "Widget ruimte"
-
-#: functions.php:231
+#: functions.php:255
 msgid "expand child menu"
 msgstr "Alles uitklappen"
 
-#: functions.php:232
+#: functions.php:256
 msgid "collapse child menu"
 msgstr "Alles inklappen"
 
-#. translators: To add an additional character subset specific to your
+#. Translators: To add an additional character subset specific to your
 #. language, translate this to 'greek', 'cyrillic', 'devanagari' or
 #. 'vietnamese'. Do not translate into your own language.
-#: functions.php:173
+#: functions.php:185
 msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
 msgid "no-subset"
 msgstr "no-subset"
@@ -271,11 +275,7 @@ msgstr "no-subset"
 msgid "Add widgets here to appear in your sidebar."
 msgstr "Widgets toevoegen zodat ze verschijnen in de sidebar."
 
-#: functions.php:86
-msgid "Social Links Menu"
-msgstr "Social-link menu"
-
-#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.0)  #-#-#-#-#
+#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.2)  #-#-#-#-#
 #. Author URI of the plugin/theme
 #: footer.php:25
 msgid "https://wordpress.org/"
