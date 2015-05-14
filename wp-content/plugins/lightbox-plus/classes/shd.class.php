@@ -7,7 +7,7 @@
     * @author Dan Zappone / 23Systems
     * @version 2.7
     * @$Id: shd.class.php 937945 2014-06-24 17:11:13Z dzappone $
-    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7/classes/shd.class.php $
+    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7.1/classes/shd.class.php $
     */
     /**
     * Website: http://sourceforge.net/projects/simplehtmldom/

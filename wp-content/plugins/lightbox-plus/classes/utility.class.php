@@ -6,7 +6,7 @@
     * @author Dan Zappone / 23Systems
     * @version 2.7
     * @$Id: utility.class.php 937945 2014-06-24 17:11:13Z dzappone $
-    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7/classes/utility.class.php $
+    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7.1/classes/utility.class.php $
     */
     if (!class_exists('lbp_utilities')) {
 

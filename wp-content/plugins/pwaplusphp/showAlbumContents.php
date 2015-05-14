@@ -1,5 +1,8 @@
 <?PHP
 
+// Don't show notices
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 // For non-PHP5 users
 if (!function_exists("stripos")) {
    function stripos($str,$needle,$offset=0) {
@@ -12,8 +15,10 @@ function showAlbumContents($ALBUM,$IN_POST = null,$TAG,$overrides_array) {
 
 $USE_LIGHTBOX="TRUE";
 $STANDALONE_MODE="TRUE";
+$now = date("U");
 
-$GDATA_TOKEN            = get_option("pwaplusphp_gdata_token");
+$GDATA_TOKEN            = get_option("pwaplusphp_oauth_token");
+$TOKEN_EXPIRES		= get_option("pwaplusphp_token_expires");
 $PICASAWEB_USER         = get_option("pwaplusphp_picasa_username");
 $IMGMAX                 = get_option("pwaplusphp_image_size","640");
 $GALLERY_THUMBSIZE      = get_option("pwaplusphp_thumbnail_size",160);
@@ -27,6 +32,16 @@ $SHOW_IMG_CAPTION	= get_option("pwaplusphp_show_caption","HOVER");
 $CAPTION_LENGTH         = get_option("pwaplusphp_caption_length","23");
 $CROP_THUMBNAILS	= get_option("pwaplusphp_crop_thumbs","TRUE");
 $HIDE_VIDEO		= get_option("pwaplusphp_hide_video","FALSE");
+$PUBLIC_ONLY            = get_option("pwaplusphp_public_only","TRUE");
+
+# ---------------------------------------------------------------------------
+# Refresh the oauth2 token if it has expired
+# ---------------------------------------------------------------------------
+if (($now > $TOKEN_EXPIRES) && ($PUBLIC_ONLY == 'FALSE')) {
+        #echo "Time to refresh...";
+        refreshOAuth2Token(); # do the refresh
+        $GDATA_TOKEN = get_option("pwaplusphp_oauth_token"); # get the token again
+}
 
 if ($overrides_array["images_per_page"] != "") { $IMAGES_PER_PAGE = $overrides_array["images_per_page"];}
 if ($overrides_array["image_size"]) { $IMGMAX = $overrides_array["image_size"];}
@@ -353,7 +368,7 @@ foreach ($vals as $val) {
                         }
 
 			$caption_link_tweak = setupCaption($caption,$ACTIVE_LIGHTBOX,$count);
-                        $out .= "<a rel=lightbox[] style=\"width: " . $TZP2 . "px; height: " . $TZP2 . "px;\" class='photo' $caption_link_tweak href='$href'>";
+                        $out .= "<a style=\"width: " . $TZP2 . "px; height: " . $TZP2 . "px;\" class='photo' $caption_link_tweak href='$href'>";
                         $out .= "<span class='border' style='width: " . $GALLERY_THUMBSIZE . "px; height: " . $GALLERY_THUMBSIZE . "px;'><img src='$thumb' />";
 			if ($SHOW_IMG_CAPTION != "NEVER") {
                         	$out .= "<span class='title' style='width: " . $GALLERY_THUMBSIZE . "px;'><span>$short_caption</span></span>";
@@ -392,7 +407,7 @@ foreach ($vals as $val) {
 		   $link_image_index=($i - 1) * ($IMAGES_PER_PAGE + 1);
 		
 		   $uri = $_SERVER["REQUEST_URI"];
-		   list($uri,$tail) = explode($urichar,$_SERVER['REQUEST_URI']);
+		   list($uri,$tail) = explode($urlchar,$_SERVER['REQUEST_URI']);
 		   $href = $uri . $urlchar . "album=$ALBUM&pg=$i";
 		   
 

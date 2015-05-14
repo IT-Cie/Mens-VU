@@ -6,7 +6,7 @@
     * @author Dan Zappone / 23Systems
     * @version 2.7
     * @$Id: init.class.php 937945 2014-06-24 17:11:13Z dzappone $
-    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7/classes/init.class.php $
+    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7.1/classes/init.class.php $
     */
     if (!class_exists('lbp_init')) {
         class lbp_init extends lbp_actions {

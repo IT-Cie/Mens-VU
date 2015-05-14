@@ -6,7 +6,7 @@
     * @author Dan Zappone / 23Systems
     * @version 2.7
     * @$Id: filters.class.php 937945 2014-06-24 17:11:13Z dzappone $
-    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7/classes/filters.class.php $
+    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7.1/classes/filters.class.php $
     */
     if (!class_exists('lbp_filters')) {
         class lbp_filters extends lbp_shortcode {

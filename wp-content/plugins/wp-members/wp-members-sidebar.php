@@ -61,15 +61,33 @@ if( ! function_exists( 'wpmem_do_sidebar' ) ):
  *
  * @since 2.4
  *
+ * @param  string $post_to      A URL to redirect to upon login, default null.
  * @global string $wpmem_regchk
  * @global string $user_login
  */
-function wpmem_do_sidebar()
+function wpmem_do_sidebar( $post_to = null )
 {
 	global $wpmem_regchk;
 	
 	$url = get_bloginfo('url'); // used here and in the logout
-	$post_to = $_SERVER['REQUEST_URI'];
+
+	if ( ! $post_to ) {
+		if ( isset( $_REQUEST['redirect_to'] ) ) {
+			$post_to = $_REQUEST['redirect_to'];
+		} elseif ( is_home() || is_front_page() ) {
+			$post_to = $_SERVER['REQUEST_URI'];
+		} elseif ( is_single() || is_page() ) {
+			$post_to = get_permalink();
+		} elseif ( is_category() ) {
+			global $wp_query;
+			$cat_id  = get_query_var( 'cat' );
+			$post_to = get_category_link( $cat_id );
+		} elseif ( is_search() ) {
+			$post_to = $url . '/?s=' . get_search_query();
+		} else {
+			$post_to = $_SERVER['REQUEST_URI'];
+		}
+	}
 	
 	// clean whatever the url is
 	$post_to = esc_url( $post_to );
@@ -87,7 +105,7 @@ function wpmem_do_sidebar()
 			'fieldset_after'  => '</fieldset>',
 			'inputs_before'   => '<div class="div_texbox">',
 			'inputs_after'    => '</div>',
-			'buttons_before'  => '<div>',
+			'buttons_before'  => '<div class="button_div">',
 			'buttons_after'   => '</div>',
 			
 			// messages
@@ -114,20 +132,15 @@ function wpmem_do_sidebar()
 		extract( wp_parse_args( $args, $defaults ) );
 		
 		$form = '';
-
-		$focus1 = "if (this.value == 'VU-net-ID') {this.value = '';}";
-		$blur1 = "if (this.value == '') {this.value = 'VU-net-ID';}";
-		$focus2 = "if (this.value == 'Wachtwoord') {this.value = '';}";
-		$blur2 = "if (this.value == '') {this.value = 'Wachtwoord';}";
 		
-		$label = '<span class="add-on" style="float: left;"><i class="icon-user"></i></span>';
-		$input = '<input type="text" name="log" class="username" id="username" value="VU-net-ID" style="margin-top: -10px;" onfocus="' . $focus1 . '" onblur="' . $blur1 . '" />';
+		$label = '<label for="username">' . __( 'Username' ) . '</label>';
+		$input = '<input type="text" name="log" class="username" id="username" />';
 		
 		$input = ( $wrap_inputs ) ? $inputs_before . $input . $inputs_after : $input;
 		$row1  = $label . $n . $input . $n;
 		
-		$label = '<span class="add-on" style="float: left;"><i class="icon-lock"></i></span>';
-		$input = '<input type="password" name="pwd" class="password" id="password" value="Wachtwoord" style="margin-top: -10px;" onfocus="' . $focus2 . '" onblur="' . $blur2 . '" />';
+		$label = '<label for="password">' . __( 'Password' ) . '</label>';
+		$input = '<input type="password" name="pwd" class="password" id="password" />';
 		
 		$input = ( $wrap_inputs ) ? $inputs_before . $input . $inputs_after : $input;
 		$row2  = $label . $n . $input . $n;
@@ -148,7 +161,7 @@ function wpmem_do_sidebar()
 		$form = $form . apply_filters( 'wpmem_sb_hidden_fields', $hidden );	
 
 
-		$buttons = '<input type="submit" name="Submit" class="wpcf7-submit" style="margin-right: 5px;" value="' . __( 'log in', 'wp-members' ) . '" />';
+		$buttons = '<input type="submit" name="Submit" class="buttons" value="' . __( 'log in', 'wp-members' ) . '" />';
 				
 			if( WPMEM_MSURL != null ) { 
 				/**
@@ -223,15 +236,10 @@ function wpmem_do_sidebar()
 		 *
 		 * @param string The logout link.
 		 */
-		global $current_user;
-		get_currentuserinfo();
-
 		$logout = apply_filters( 'wpmem_logout_link', $url . '/?a=logout' );
-		$password = apply_filters( 'wpmem_forgot_link', $url . '/leden/?a=pwdchange' );
 		
-		$str = '<h1 style="font-size: 22px; font-weight: normal;">Hoi, <b>' . sprintf( __( $current_user->user_firstname , 'wp-members' ), $user_login ) . '</b>!</h1>
-		  <a href="' . $logout . '" style="font-size: 16px; float: right; margin-top: -71px; background: -webkit-linear-gradient(top, #e05d22 0%, #d94412 100%);background: linear-gradient(to bottom, #e05d22 0%, #d94412 100%);border: none;border-bottom: 3px solid #b93207;border-radius: 2px;color: #fff;display: inline-block;padding: 11px 24px 10px;text-decoration: none;">Afmelden</a>
-<h1 style="font-size: 11px; font-weight: normal; padding: 0 0 0 10px; margin-top:-10px">Klik <a href="' . $password .'" style="font-weight: bold;">hier</a> om je wachtwoord te veranderen.</h1>';
+		$str = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login ) . '<br />
+		  <a href="' . $logout . '">' . __( 'click here to log out', 'wp-members' ) . '</a></p>';
 		
 		/**
 		 * Filter the sidebar user login status.
@@ -278,13 +286,20 @@ class widget_wpmemwidget extends WP_Widget
 	{
 	
 		/* Default widget settings. */
-		$defaults = array( 'title' => __('Login Status', 'wp-members') );
+		$defaults = array( 
+			'title'       => __('Login Status', 'wp-members'),
+			'redirect_to' => '',
+		);
 		$instance = wp_parse_args( ( array ) $instance, $defaults );
 		
 		/* Title input */ ?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'wp-members'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:95%;" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'redirect_to' ); ?>"><?php _e('Redirect to (optional):', 'wp-members'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'redirect_to' ); ?>" name="<?php echo $this->get_field_name( 'redirect_to' ); ?>" value="<?php echo $instance['redirect_to']; ?>" style="width:95%;" />
 		</p>
 		<?php
     }
@@ -301,7 +316,8 @@ class widget_wpmemwidget extends WP_Widget
 		$instance = $old_instance;
 		
 		/* Strip tags for title to remove HTML. */
-		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['title']       = strip_tags( $new_instance['title'] );
+		$instance['redirect_to'] = strip_tags( $new_instance['redirect_to'] );
 		
         return $instance;
     }
@@ -317,7 +333,8 @@ class widget_wpmemwidget extends WP_Widget
 		extract( $args );
 
 		// Get the Widget Title
-		$title = ( array_key_exists( 'title', $instance ) ) ? $instance['title'] : __( 'Login Status', 'wp-members' );
+		$title       = ( array_key_exists( 'title', $instance ) )       ? $instance['title']       : __( 'Login Status', 'wp-members' );
+		$redirect_to = ( array_key_exists( 'redirect_to', $instance ) ) ? $instance['redirect_to'] : '';
 		
 		echo $before_widget;
 		/**
@@ -339,7 +356,7 @@ class widget_wpmemwidget extends WP_Widget
 			echo $before_title . apply_filters( 'wpmem_widget_title', $title ) . $after_title;
 
 			// The Widget
-			if( function_exists( 'wpmem' ) ) { wpmem_do_sidebar(); }
+			if ( function_exists( 'wpmem' ) ) { wpmem_do_sidebar( $redirect_to ); }
 
 		echo '</div>';
 		echo $after_widget;

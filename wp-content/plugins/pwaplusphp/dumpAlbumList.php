@@ -1,11 +1,17 @@
 <?PHP
+
+// Don't show notices
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 function dumpAlbumList($FILTER,$COVER = "FALSE",$overrides_array) {
 
 $USE_LIGHTBOX="TRUE";
 $STANDALONE_MODE="TRUE";
+$now = date("U");
 
 $ALBUMS_TO_HIDE         = ($overrides_array['hide_albums']) ? explode(",",$overrides_array['hide_albums']) : array(); //added due to is_array error
-$GDATA_TOKEN		= get_option("pwaplusphp_gdata_token");
+$GDATA_TOKEN		= get_option("pwaplusphp_oauth_token");
+$TOKEN_EXPIRES		= get_option("pwaplusphp_token_expires");
 $PICASAWEB_USER	 	= get_option("pwaplusphp_picasa_username");
 #$IMGMAX		 	= get_option("pwaplusphp_image_size","640");
 #$GALLERY_THUMBSIZE 	= get_option("pwaplusphp_thumbnail_size",160);
@@ -27,7 +33,20 @@ $DESCRIPTION_LENGTH     = get_option("pwaplusphp_description_length","120");
 $DATE_FORMAT		= get_option("pwaplusphp_date_format","Y-m-d");
 $CACHE_THUMBNAILS       = get_option("pwaplusphp_cache_thumbs","FALSE");
 $MAIN_PHOTO_PAGE        = get_option("pwaplusphp_main_photo");
+$DEBUG = 0;
 
+# ---------------------------------------------------------------------------
+# Refresh the oauth2 token if it has expired
+# ---------------------------------------------------------------------------
+if ($DEBUG) { echo "<p>DEBUG: Now is $now, token expires at $TOKEN_EXPIRES</p>"; }
+if (($now > $TOKEN_EXPIRES) && ($PUBLIC_ONLY == 'FALSE')) {
+	if ($DEBUG) { echo "<p>DEBUG: [dumpAlbumContents] Token is expired, calling function to refresh it</p>"; }
+	refreshOAuth2Token(); # do the refresh
+	$GDATA_TOKEN = get_option("pwaplusphp_oauth_token"); # get the token again
+} else {
+	$time_until_expiry = $TOKEN_EXPIRES - $now;
+	if ($DEBUG) { echo "<p>DEBUG: [dumpAlbumContents] Token is still valid for another $time_until_expiry secs</p>"; }
+}
 # The overrides
 if ($overrides_array["images_per_page"] != "") { $IMAGES_PER_PAGE = $overrides_array["images_per_page"];}
 if ($overrides_array["image_size"]) { $IMGMAX = $overrides_array["image_size"];}
@@ -234,10 +253,7 @@ foreach ($vals as $val) {
                                 $disp_name = substr($disp_name,0,$TRUNCATE_TO) . "...";
                         }
 			$total_images = $total_images + $num;
-            if ($picasa_name == "ProfilePhotos" || $picasa_name == "InstantUpload" || $picasa_name == "Website")
-                $out .= "<div class='pwaplusphp_albumcover' style='display:none;'>\n";
-            else
-                $out .= "<div class='pwaplusphp_albumcover'>\n";
+                        $out .= "<div class='pwaplusphp_albumcover'>\n";
 			$uri = $_SERVER["REQUEST_URI"];
 			list($back_link,$uri_tail) = explode('?',$uri);
                    	if ( get_option('permalink_structure') != '' ) {
@@ -317,13 +333,18 @@ foreach ($vals as $val) {
 }
 
    if ( ($FILTER != "RANDOM") && (strtoupper($COVER) != "TRUE")) {
-	$header = "<div id='pwaheader' style='display:none'>";
-	$header .= "<span class='lang_gallery'>$LANG_GALLERY</span></div>\n";
+	$header = "<div id='pwaheader'>";
+	if ($wptouch_plugin->applemobile != "1") {
+		$header .= "<span class='lang_gallery'>$FILTER $LANG_GALLERY</span>";
+		$header .= "<span class='total_images'>$total_images $LANG_PHOTOS_IN $album_count $LANG_ALBUMS</span></div>\n";
+	} else { 
+                $header .= "<span class='total_images_wpt'>$total_images $LANG_PHOTOS_IN $album_count $LANG_ALBUMS</span></div>\n";
+	}
 
 	$out = $header . $out;
 		
 	if ($SHOW_FOOTER == "TRUE") {
-		$out .= "<div id='pwafooter'>$LANG_GENERATED <a href='https://code.google.com/p/pwaplusphp/'>PWA+PHP</a> v" . $THIS_VERSION . ".</div>";
+		$out .= "<div id='pwafooter'>$LANG_GENERATED <a href='http://code.google.com/p/pwaplusphp/'>PWA+PHP</a> v" . $THIS_VERSION . ".</div>";
 	}
    }
 

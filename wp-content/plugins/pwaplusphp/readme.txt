@@ -3,14 +3,14 @@ Contributors: smccandl
 Donate link: http://pwaplusphp.smccandl.net/
 Tags: picasa, picasa web albums, picasa private, picasa cache, picasa plugin, picasa wordpress
 Requires at least: 2.9.1
-Tested up to: 4.0
+Tested up to: 4.2.2
 Stable tag: trunk
 
 The best rated Picasa plugin for Wordpress, PWA+PHP, puts your public and private Picasa albums on your site in your language!
 
 == Description ==
 
-**v0.9.8 Update:** *Pagination is fixed in WP 4.0.*
+**Re-Auth Required:** *AuthSub (used by PWA+PHP to connect to your Private albums) [is going away.](https://support.google.com/accounts/answer/6140402) This change impacts all users accessing Private albums via PWA+PHP and v0.9.8 [will stop working on April 20th](http://pwaplusphp.smccandl.net/support/responses/why-switch-from-authsub-to-oauth2).*
 
 [PWA+PHP](http://pwaplusphp.smccandl.net) is a lightweight solution for displaying your private (unlisted) and public Picasa Albums within Wordpress in your language using Fancybox, Shadowbox or Lightbox. The plugin provides a guided installer that helps you generate your gdata token and set display options for your albums. 
 
@@ -66,6 +66,24 @@ The CSS file that ships with PWA+PHP assumes an album thumbnail of 160px.  If yo
 6. Overlay display option
 
 == Changelog ==
+= 0.9.14 = 
+* Fixed re-auth bug introduced in 0.9.13
+
+= 0.9.13 =
+* Check if public only is false before calling oauth2 token refresh
+
+= 0.9.12 =
+* Disabled debug mode
+
+= 0.9.11 =
+* Fixed typo affecting private albums in showAlbumContents.php
+
+= 0.9.10 =
+* Added code to suppress notices from PHP
+
+= 0.9.9 =
+* Replaced AuthSub private album authentication with OAuth2.
+
 = 0.9.8 =
 * Fixed pagination bug in WP 4.0
 * Replaced deprecated split function calls with explode in showAlbumContents.php
