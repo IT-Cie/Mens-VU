@@ -70,24 +70,7 @@ function wpmem_do_sidebar( $post_to = null )
 	global $wpmem_regchk;
 	
 	$url = get_bloginfo('url'); // used here and in the logout
-
-	if ( ! $post_to ) {
-		if ( isset( $_REQUEST['redirect_to'] ) ) {
-			$post_to = $_REQUEST['redirect_to'];
-		} elseif ( is_home() || is_front_page() ) {
-			$post_to = $_SERVER['REQUEST_URI'];
-		} elseif ( is_single() || is_page() ) {
-			$post_to = get_permalink();
-		} elseif ( is_category() ) {
-			global $wp_query;
-			$cat_id  = get_query_var( 'cat' );
-			$post_to = get_category_link( $cat_id );
-		} elseif ( is_search() ) {
-			$post_to = $url . '/?s=' . get_search_query();
-		} else {
-			$post_to = $_SERVER['REQUEST_URI'];
-		}
-	}
+  $post_to = $_SERVER['REQUEST_URI'];
 	
 	// clean whatever the url is
 	$post_to = esc_url( $post_to );
@@ -105,7 +88,7 @@ function wpmem_do_sidebar( $post_to = null )
 			'fieldset_after'  => '</fieldset>',
 			'inputs_before'   => '<div class="div_texbox">',
 			'inputs_after'    => '</div>',
-			'buttons_before'  => '<div class="button_div">',
+			'buttons_before'  => '<div>',
 			'buttons_after'   => '</div>',
 			
 			// messages
@@ -132,15 +115,19 @@ function wpmem_do_sidebar( $post_to = null )
 		extract( wp_parse_args( $args, $defaults ) );
 		
 		$form = '';
-		
-		$label = '<label for="username">' . __( 'Username' ) . '</label>';
-		$input = '<input type="text" name="log" class="username" id="username" />';
+    $focus1 = "if (this.value == 'VU-net-ID') {this.value = '';}";
+    $blur1 = "if (this.value == '') {this.value = 'VU-net-ID';}";
+    $focus2 = "if (this.value == 'Wachtwoord') {this.value = '';}";
+    $blur2 = "if (this.value == '') {this.value = 'Wachtwoord';}";
+
+    $label = '<span class="add-on" style="float: left;"><i class="icon-user"></i></span>';
+    $input = '<input type="text" name="log" class="username" id="username" value="VU-net-ID" style="margin-top: -10px;" onfocus="' . $focus1 . '" onblur="' . $blur1 . '" />';
 		
 		$input = ( $wrap_inputs ) ? $inputs_before . $input . $inputs_after : $input;
 		$row1  = $label . $n . $input . $n;
 		
-		$label = '<label for="password">' . __( 'Password' ) . '</label>';
-		$input = '<input type="password" name="pwd" class="password" id="password" />';
+		$label = '<span class="add-on" style="float: left;"><i class="icon-lock"></i></span>';
+		$input = '<input type="password" name="pwd" class="password" id="password" value="Wachtwoord" style="margin-top: -10px;" onfocus="' . $focus2 . '" onblur="' . $blur2 . '" />';
 		
 		$input = ( $wrap_inputs ) ? $inputs_before . $input . $inputs_after : $input;
 		$row2  = $label . $n . $input . $n;
@@ -161,7 +148,7 @@ function wpmem_do_sidebar( $post_to = null )
 		$form = $form . apply_filters( 'wpmem_sb_hidden_fields', $hidden );	
 
 
-		$buttons = '<input type="submit" name="Submit" class="buttons" value="' . __( 'log in', 'wp-members' ) . '" />';
+		$buttons = '<input type="submit" name="Submit" class="wpcf7-submit" style="margin-right: 5px;" value="' . __( 'log in', 'wp-members' ) . '" />';
 				
 			if( WPMEM_MSURL != null ) { 
 				/**
@@ -236,10 +223,15 @@ function wpmem_do_sidebar( $post_to = null )
 		 *
 		 * @param string The logout link.
 		 */
+    global $current_user;
+    get_currentuserinfo();
+
 		$logout = apply_filters( 'wpmem_logout_link', $url . '/?a=logout' );
+    $password = apply_filters( 'wpmem_forgot_link', $url . '/leden/?a=pwdchange' );
 		
-		$str = '<p>' . sprintf( __( 'You are logged in as %s', 'wp-members' ), $user_login ) . '<br />
-		  <a href="' . $logout . '">' . __( 'click here to log out', 'wp-members' ) . '</a></p>';
+		$str = '<h1 style="font-size: 22px; font-weight: normal;">Hoi, <b>' . sprintf( __( $current_user->user_firstname , 'wp-members' ), $user_login ) . '</b>!</h1>
+      <a href="' . $logout . '" style="font-size: 16px; float: right; margin-top: -71px; background: -webkit-linear-gradient(top, #e05d22 0%, #d94412 100%);background: linear-gradient(to bottom, #e05d22 0%, #d94412 100%);border: none;border-bottom: 3px solid #b93207;border-radius: 2px;color: #fff;display: inline-block;padding: 11px 24px 10px;text-decoration: none;">Afmelden</a>
+      <h1 style="font-size: 11px; font-weight: normal; padding: 0 0 0 10px; margin-top:-10px">Klik <a href="' . $password .'" style="font-weight: bold;">hier</a> om je wachtwoord te veranderen.</h1>';
 		
 		/**
 		 * Filter the sidebar user login status.

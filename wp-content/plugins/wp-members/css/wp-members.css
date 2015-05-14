@@ -214,3 +214,14 @@ see http://rocketgeek.com/tips-and-tricks/load-a-custom-stylesheet/
 #wpmem_reg .captcha table{
 	line-height: 0px;
 }
+
+input.wpcf7-submit, input.wpcf7-submit:focus {
+	background-color: #FE4800;
+	border: none;
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: none;
+	padding: 3px 10px;
+	cursor: pointer;
+}
