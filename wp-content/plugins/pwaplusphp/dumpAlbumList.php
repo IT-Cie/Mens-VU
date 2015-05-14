@@ -253,7 +253,10 @@ foreach ($vals as $val) {
                                 $disp_name = substr($disp_name,0,$TRUNCATE_TO) . "...";
                         }
 			$total_images = $total_images + $num;
-                        $out .= "<div class='pwaplusphp_albumcover'>\n";
+            if ($picasa_name == "ProfilePhotos" || $picasa_name == "InstantUpload" || $picasa_name == "Website")
+                $out .= "<div class='pwaplusphp_albumcover' style='display:none;'>\n";
+            else
+                $out .= "<div class='pwaplusphp_albumcover'>\n";
 			$uri = $_SERVER["REQUEST_URI"];
 			list($back_link,$uri_tail) = explode('?',$uri);
                    	if ( get_option('permalink_structure') != '' ) {
@@ -334,17 +337,12 @@ foreach ($vals as $val) {
 
    if ( ($FILTER != "RANDOM") && (strtoupper($COVER) != "TRUE")) {
 	$header = "<div id='pwaheader'>";
-	if ($wptouch_plugin->applemobile != "1") {
-		$header .= "<span class='lang_gallery'>$FILTER $LANG_GALLERY</span>";
-		$header .= "<span class='total_images'>$total_images $LANG_PHOTOS_IN $album_count $LANG_ALBUMS</span></div>\n";
-	} else { 
-                $header .= "<span class='total_images_wpt'>$total_images $LANG_PHOTOS_IN $album_count $LANG_ALBUMS</span></div>\n";
-	}
+	$header .= "<span class='lang_gallery'>$LANG_GALLERY</span></div>\n";
 
 	$out = $header . $out;
 		
 	if ($SHOW_FOOTER == "TRUE") {
-		$out .= "<div id='pwafooter'>$LANG_GENERATED <a href='http://code.google.com/p/pwaplusphp/'>PWA+PHP</a> v" . $THIS_VERSION . ".</div>";
+		$out .= "<div id='pwafooter'>$LANG_GENERATED <a href='https://code.google.com/p/pwaplusphp/'>PWA+PHP</a> v" . $THIS_VERSION . ".</div>";
 	}
    }
 

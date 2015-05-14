@@ -368,7 +368,7 @@ foreach ($vals as $val) {
                         }
 
 			$caption_link_tweak = setupCaption($caption,$ACTIVE_LIGHTBOX,$count);
-                        $out .= "<a style=\"width: " . $TZP2 . "px; height: " . $TZP2 . "px;\" class='photo' $caption_link_tweak href='$href'>";
+                        $out .= "<a rel=lightbox[] style=\"width: " . $TZP2 . "px; height: " . $TZP2 . "px;\" class='photo' $caption_link_tweak href='$href'>";
                         $out .= "<span class='border' style='width: " . $GALLERY_THUMBSIZE . "px; height: " . $GALLERY_THUMBSIZE . "px;'><img src='$thumb' />";
 			if ($SHOW_IMG_CAPTION != "NEVER") {
                         	$out .= "<span class='title' style='width: " . $GALLERY_THUMBSIZE . "px;'><span>$short_caption</span></span>";
