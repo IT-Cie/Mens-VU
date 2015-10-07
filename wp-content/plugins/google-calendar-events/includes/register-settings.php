@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 2.0.0
  */
 function gce_register_settings() {
-	
+
 	$gce_settings = array(
 
 		/* General Settings */
@@ -27,10 +27,9 @@ function gce_register_settings() {
 			'api_key' => array(
 				'id'   => 'api_key',
 				'name' => __( 'Google API Key', 'gce' ),
-				'desc' => __( 'If left blank all displayed Google calendars will use a public Google API key shared across all plugin users.', 'gce' ) . ' ' .
-				          __( 'Currently the shared key is limited to 500,000 requests per day and 5 requests per second.', 'gce' ) . '<br/>' .
-				          sprintf( __( 'To avoid these limits <a href="%s" target="_blank">click here for instructions on how to generate and use your own Google API key.</a>', 'gce' ),
-								  gce_ga_campaign_url( 'http://wpdocs.philderksen.com/google-calendar-events/getting-started/api-key-settings/', 'gce_lite', 'settings_link', 'docs' ) ),
+				'desc' => __( 'Google now requires you to use your own API key to avoid running into the request limit.', 'gce' ) . '<br/>' .
+				          sprintf( __( '<a href="%s" target="_blank">Instructions on how to generate and set your own Google API key.</a>', 'gce' ),
+					          gce_ga_campaign_url( 'http://wpdocs.philderksen.com/google-calendar-events/getting-started/api-key-settings/', 'gce_lite', 'settings_link', 'docs' ) ),
 				'size' => 'regular-text',
 				'type' => 'text'
 			),
@@ -43,7 +42,7 @@ function gce_register_settings() {
 			),
 			'disable_css' => array(
 				'id'   => 'disable_css',
-				'name' => __( 'Disable Plugin CSS', 'sc' ),
+				'name' => __( 'Disable Plugin CSS', 'gce' ),
 				'desc' => __( "If this option is checked, this plugin's CSS file will not be referenced.", 'gce' ),
 				'type' => 'checkbox'
 			),
@@ -118,9 +117,9 @@ function gce_get_settings_field_args( $option, $section ) {
 
 /*
  * Single checkbox callback function
- * 
+ *
  * @since 2.0.0
- * 
+ *
  */
 function gce_checkbox_callback( $args ) {
 	global $gce_options;
@@ -139,9 +138,9 @@ function gce_checkbox_callback( $args ) {
  * Textbox callback function
  * Valid built-in size CSS class values:
  * small-text, regular-text, large-text
- * 
+ *
  * @since 2.1.0
- * 
+ *
  */
 function gce_text_callback( $args ) {
 	global $gce_options;
@@ -164,20 +163,19 @@ function gce_text_callback( $args ) {
 
 /*
  * Function we can use to sanitize the input data and return it when saving options
- * 
+ *
  * @since 2.0.0
- * 
+ *
  */
 function gce_settings_sanitize( $input ) {
-	//add_settings_error( 'gce-notices', '', '', '' );
-	return $input;
+	return gce_sanitize_input( $input, 'sanitize_text_field' );
 }
 
 /*
  *  Default callback function if correct one does not exist
- * 
+ *
  * @since 2.0.0
- * 
+ *
  */
 function gce_missing_callback( $args ) {
 	printf( __( 'The callback function used for the <strong>%s</strong> setting is missing.', 'gce' ), $args['id'] );
@@ -185,24 +183,24 @@ function gce_missing_callback( $args ) {
 
 /*
  * Function used to return an array of all of the plugin settings
- * 
+ *
  * @since 2.0.0
- * 
+ *
  */
 function gce_get_settings() {
 
 	// Set default settings
 	// If this is the first time running we need to set the defaults
 	if ( ! get_option( 'gce_upgrade_has_run' ) ) {
-		
+
 		$general = get_option( 'gce_settings_general' );
-		
+
 		$general['save_settings']      = 1;
 		$general['always_enqueue']     = 1;
-		
+
 		update_option( 'gce_settings_general', $general );
 	}
-	
+
 	$general_settings = is_array( get_option( 'gce_settings_general' ) ) ? get_option( 'gce_settings_general' )  : array();
 
 	return $general_settings;

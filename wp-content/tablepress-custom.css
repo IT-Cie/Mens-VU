@@ -1,0 +1,22 @@
+.tablepress thead th,
+.tablepress tfoot th {
+	background-color: #454343;
+	opacity: .8;
+	color: #ffffff;
+}
+
+.tablepress-id-1 .column-1 {
+	width: 12%;
+}
+
+.tablepress-id-1 .column-2 {
+	width: 52%;
+}
+
+.tablepress-id-1 .column-3 {
+	width: 20%;
+}
+
+.tablepress-id-1 .column-4 {
+	width: 16%;
+}

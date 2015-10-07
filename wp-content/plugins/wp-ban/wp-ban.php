@@ -3,7 +3,7 @@
 Plugin Name: WP-Ban
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Ban users by IP, IP Range, host name, user agent and referer url from visiting your WordPress's blog. It will display a custom ban message when the banned IP, IP range, host name, user agent or referer url tries to visit you blog. You can also exclude certain IPs from being banned. There will be statistics recordered on how many times they attemp to visit your blog. It allows wildcard matching too.
-Version: 1.65
+Version: 1.66
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 Text Domain: wp-ban
@@ -11,7 +11,7 @@ Text Domain: wp-ban
 
 
 /*
-	Copyright 2014  Lester Chan  (email : lesterchan@gmail.com)
+	Copyright 2015  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -177,17 +177,22 @@ function banned() {
 		}
 	}
 
-	if(!$is_excluded) {
-		if(!empty($banned_ips))
-			process_ban($banned_ips, $ip);
-		if(!empty($banned_ips_range))
-			process_ban_ip_range($banned_ips_range);
-		if(!empty($banned_hosts))
-			process_ban($banned_hosts, @gethostbyaddr($ip));
-		if(!empty($banned_referers))
-			process_ban($banned_referers, $_SERVER['HTTP_REFERER']);
-		if(!empty($banned_user_agents))
-			process_ban($banned_user_agents, $_SERVER['HTTP_USER_AGENT']);
+	if( ! $is_excluded ) {
+		if( ! empty( $banned_ips ) ) {
+			process_ban( $banned_ips, $ip );
+		}
+		if( ! empty( $banned_ips_range ) ) {
+			process_ban_ip_range( $banned_ips_range );
+		}
+		if( ! empty( $banned_hosts ) ) {
+			process_ban( $banned_hosts, @gethostbyaddr( $ip ) );
+		}
+		if( ! empty( $banned_referers ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
+			process_ban( $banned_referers, $_SERVER['HTTP_REFERER'] );
+		}
+		if( ! empty( $banned_user_agents ) && ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
+			process_ban( $banned_user_agents, $_SERVER['HTTP_USER_AGENT'] );
+		}
 	}
 }
 
@@ -231,16 +236,6 @@ function is_admin_referer($check) {
 ### Function: Check Whether Or Not The User Agent Is Used by Admin
 function is_admin_user_agent($check) {
 	return preg_match_wildcard($check, $_SERVER['HTTP_USER_AGENT']);
-}
-
-
-### Function: Returns page's language attributes depends on WordPress language
-function get_language_attributes($doctype = 'html') {
-	ob_start();
-	language_attributes();
-	$language_attributes = ob_get_contents();
-	ob_end_clean();
-	return $language_attributes;
 }
 
 

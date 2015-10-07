@@ -1,11 +1,10 @@
 === Google Calendar Events ===
-Contributors: pderksen, nickyoung87, rosshanney
+Contributors: pderksen, nickyoung87, nekojira, rosshanney
 Tags: google calendar, google, calendar, events, gcal
-Requires at least: 3.9.3
-Tested up to: 4.2
-Stable tag: 2.2.5
+Requires at least: 3.9
+Tested up to: 4.3
+Stable tag: 2.4.0
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Parses Google Calendar feeds and displays the events as a calendar grid or list on a page, post or widget.
 
@@ -27,49 +26,52 @@ Parses Google Calendar feeds and displays the events as a calendar grid or list 
 
 ###Updates###
 
-* [Get notified when new features are released](http://eepurl.com/0_VsT)
-* [Follow this project on Github](https://github.com/pderksen/WP-Google-Calendar-Events)
+* [Get notified when new features are released](https://www.getdrip.com/forms/9434542/submissions/new)
+* [Follow this project on Github](https://github.com/moonstonemedia/WP-Google-Calendar-Events)
 
 This plugin was originally created by [Ross Hanney](http://www.rhanney.co.uk), a web developer based in the UK specialising in WordPress and PHP.
 
 ## Available Translations ##
 
-* Spanish - Provided by Eduardo Larequi of [educacion.navarra.es/web/pnte/](http://www.educacion.navarra.es/web/pnte/).
-* Italian - Provided by Francesco Paccagnella of [pacca.it](http://www.pacca.it/).
+* Catalan - Provided by Toni Ginard & Monica Grau of [agora.xtec.cat](http://agora.xtec.cat/).
+* Dutch - Provided by Henri van Werkhoven.
+* Finnish - Provided by Ville Myllymäki.
 * French - Provided by Vincent Bray.
 * German - Provided by Stefanie Drucker of [kreativhuhn.at](http://www.kreativhuhn.at/).
+* Italian - Provided by Francesco Paccagnella of [pacca.it](http://www.pacca.it/).
+* Lithuanian - Provided by Andrius Mazeika of [mazeika.info](http://mazeika.info/).
 * Norwegian - Provided by Tore Hjartland of [aliom.no](http://www.aliom.no/).
 * Polish - Provided by Michał Pasternak of [iplweb.pl](http://iplweb.pl/).
-* Lithuanian - Provided by Andrius Mazeika of [mazeika.info](http://mazeika.info/).
-* Dutch - Provided by Henri van Werkhoven.
-* Catalan - Provided by Toni Ginard & Monica Grau of [agora.xtec.cat](http://agora.xtec.cat/).
+* Portuguese (Brazilian) - Provided by CodeLayer.
+* Russian - Provided by Vadim Reutskiy.
+* Spanish - Provided by Eduardo Larequi of [educacion.navarra.es/web/pnte/](http://www.educacion.navarra.es/web/pnte/).
+* Swedish - Provided by Familjedaghemmet Chicos of [chicos.nu](http://www.chicos.nu/).
 
 == Installation ==
 
-There are three ways to install this plugin.
+There are several ways to install this plugin.
 
-= 1. Admin Search =
-1. In your Admin, go to menu Plugins > Add.
+= Admin Search =
+1. In your WordPress admin, go to `Plugins > Add`.
 1. Search for `Google Calendar`.
-1. Find the plugin that's labeled `Google Calendar Events`.
-1. Look for the author name `Phil Derksen` on the plugin.
-1. Click to install.
+1. Find the plugin that's labeled `Google Calendar Events` by `Moonstone Media`.
+1. Click `Install Now`.
 1. Activate the plugin.
 1. A new menu item `GCal Events` will appear in the main menu.
 
-= 2. Download & Upload =
-1. Download the plugin (a zip file) on the right column of this page.
-1. In your Admin, go to menu Plugins > Add.
-1. Select the tab "Upload".
-1. Upload the .zip file you just downloaded.
+= Admin Upload =
+1. Download the plugin zip file using the large orange button to the right.
+1. In your WordPress admin, go to `Plugins > Add`.
+1. Select `Upload Plugin` at the top.
+1. Find and upload the zip file you just downloaded.
 1. Activate the plugin.
 1. A new menu item `GCal Events` will appear in the main menu.
 
-= 3. FTP Upload =
-1. Download the plugin (.zip file) on the right column of this page.
+= FTP Upload =
+1. Download the plugin zip file using the large orange button to the right.
 1. Unzip the zip file contents.
 1. Upload the `google-calendar-events` folder to the `/wp-content/plugins/` directory of your site.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
+1. Activate the plugin on the `Installed Plugins` listing.
 1. A new menu item `GCal Events` will appear in the main menu.
 
 == Frequently Asked Questions ==
@@ -87,6 +89,62 @@ There are three ways to install this plugin.
 1. Event display builder editor
 
 == Changelog ==
+
+= 2.4.0 - September 29, 2015 =
+* Announcement: Simple Calendar is coming, changes ahead.
+* Deprecation: The bundled/default Google API key reached it's quota and was shut off. Using your own API key is now required.
+
+= 2.3.2 - September 1, 2015 =
+* Fix: Bug in HTML support in events description.
+
+= 2.3.1 - August 31, 2015 =
+* Fix: Fallback for DateTime::setTimestamp() for installations still using PHP 5.2.
+* Fix: Support HTML in events description when using `html="true"` attribute in shortcode.
+* Localization: Added Finnish translations, courtesy of Ville Myllymäki.
+
+= 2.3.0 - August 24, 2015 =
+
+* Fix: Improve timezone handling when sending a request to Google.
+* Tweak: Reintroduced imagesloaded library to improve compatibility with themes using Isotope and Masonry.
+
+= 2.2.91 - August 18, 2015 =
+
+* Fix: Calendar not working correctly with custom date range grid after 2.2.9 changes.
+
+= 2.2.9 - August 14, 2015 =
+
+* Fix: Event links pointing to Google Calendar have a timezone argument from feed setting.
+* Fix: Improved assets loading, only load scripts on posts and pages that have a calendar.
+* Localization: Updated Norwegian translations.
+
+= 2.2.8 - August 7, 2015 =
+
+* Fix: Improved security when saving plugin settings.
+* Fix: Added URL encoding to fix some issues with API keys containing special characters.
+* Tweak: Use calendar feed timezone or website timezone (default calendar).
+
+= 2.2.7 - July 31, 2015 =
+
+* Feature: Added an 'Add Calendar' button to quickly add a shortcode in posts.
+* Fix: Reverted register scripts hook to init.
+* Localization: Updated French translations.
+* Tweak: Flush permalinks on plugin activation and deactivation.
+* Tweak: Added `[if-not-location]` event builder conditional shortcode.
+* Tweak: Added a 'gce_no_events_message_text' filter when no events are found.
+* Tweak: Added a clear cache bulk action for clearing caches of multiple feeds.
+
+= 2.2.6 - July 16, 2015 =
+
+* Plugin performs a requirements check to ensure users are running a recent version of WordPress.
+* Added '.gce-has-<n>-events' class to count events in each day in grid display.
+* Removed unnecessary imagesLoaded JS library (optional dependency of the qTip2 library).
+* Fixed a bug with the start month of the custom date range grid view.
+* Fixed a bug with backslashes in date ant time custom format inputs.
+* Fixed scripts and styles loading issues.
+* Fixed bugs when custom date range values were left blank.
+* Added Russian translation provided by Vadim Reutskiy.
+* Added Swedish translation provided by Familjedaghemmet Chicos.
+* Tested up to WordPress 4.3.
 
 = 2.2.5 - April 22, 2015 =
 
@@ -203,7 +261,7 @@ There are three ways to install this plugin.
 * Fixed bug with all day events not displaying.
 * Added missing timezone parameter to internal query.
 
-= 2.1.0 = 
+= 2.1.0 =
 
 * Updated to use Google Calendar API version 3. Version 2 deprecated on Nov. 17, 2014.
 
@@ -211,7 +269,7 @@ There are three ways to install this plugin.
 
 * As of Nov. 17, 2014 the GCal API v2 is deprecated, which breaks all calendar feed displays. This update will temporarily hide the display while we work on a solution that uses GCal API v3.
 
-= 2.0.7 = 
+= 2.0.7 =
 
 * Events will now display if it hasn't ended yet for list views.
 * Fixed bug with date() call causing a display error in some cases.
@@ -222,7 +280,7 @@ There are three ways to install this plugin.
 * Simplified text domain function.
 * Added Lithuanian translation - Provided by Andrius Mazeika of [mazeika.info](http://mazeika.info/).
 
-= 2.0.6.2 = 
+= 2.0.6.2 =
 
 * Reverted previous bug fix that introduced new bugs.
 

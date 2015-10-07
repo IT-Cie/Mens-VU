@@ -4,9 +4,9 @@
     * @subpackage actions.class.php
     * @internal 2013.01.16
     * @author Dan Zappone / 23Systems
-    * @version 2.7
-    * @$Id: actions.class.php 1132941 2015-04-11 23:16:28Z dzappone $
-    * @$URL: http://plugins.svn.wordpress.org/lightbox-plus/tags/2.7.1/classes/actions.class.php $
+    * @version 2.7.2
+    * @$Id: actions.class.php 937945 2014-06-24 17:11:13Z dzappone $
+    * @$URL: https://plugins.svn.wordpress.org/lightbox-plus/tags/2.7/classes/actions.class.php $
     */
     if (!class_exists('lbp_actions')) {
         class lbp_actions extends lbp_filters {
@@ -67,7 +67,7 @@
                 if ( $lightboxPlusOptions['disable_css'] ) {
                     echo "<!-- User set lightbox styles -->".PHP_EOL;
                 } else {
-                    wp_register_style('lightboxStyle', $style_path_url.'/'.$lightboxPlusOptions['lightboxplus_style'].'/colorbox.css','',$g_lbp_version,'screen');
+                    wp_register_style('lightboxStyle', $style_path_url.'/'.$lightboxPlusOptions['lightboxplus_style'].'/colorbox.min.css','',$g_lbp_version,'screen');
                     wp_enqueue_style('lightboxStyle');
                     if (file_exists($style_path_dir.'/'.$lightboxPlusOptions['lightboxplus_style'].'/helper.min.js')) {
                         wp_enqueue_script('lbp-helper',$style_path_url.'/'.$lightboxPlusOptions['lightboxplus_style'].'/helper.min.js','',$g_lbp_version,$this->setLoadLocation($lightboxPlusOptions['load_location']));

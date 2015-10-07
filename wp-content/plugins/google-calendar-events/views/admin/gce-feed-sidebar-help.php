@@ -12,17 +12,17 @@
 		</li>
 		<li>
 			<div class="dashicons dashicons-arrow-right-alt2"></div>
-			<a href="http://eepurl.com/0_VsT" target="_blank">
-				<?php _e( 'Get notified of new features', 'gce' ); ?></a>
+			<a href="https://www.getdrip.com/forms/9434542/submissions/new" target="_blank">
+				<?php _e( 'Get notified of important updates', 'gce' ); ?></a>
 		</li>
 	</ul>
 
 	<p>
-		<?php _e( 'Your review helps more folks find our plugin. Thanks so much!', 'gced' ); ?>
+		<?php _e( 'Are you finding our GCal plugin helpful? 5-star ratings keep us motivated!', 'gce' ); ?> :)
 	</p>
 	<div class="centered">
 		<a href="https://wordpress.org/support/view/plugin-reviews/google-calendar-events#postform" class="button-primary" target="_blank">
-			<?php _e( 'Review this Plugin Now', 'gce' ); ?></a>
+			<?php _e( 'Rate our plugin on wordpress.org', 'gce' ); ?></a>
 	</div>
 
 </div>
