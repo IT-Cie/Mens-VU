@@ -21,6 +21,19 @@ function check_vu_net_id( $fields )
 	return $fields;
 }
 
+// Zelfde check voor standaard wp registratie
+function check_vu_net_id_wp_login_register( $errors, $sanitized_user_login ) {
+
+    if( !preg_match("/^[a-z]{3}\d{3}$/", $sanitized_user_login))
+	{
+        $errors->add( 'vu_net_id_error', __( '<strong>MISLUKT</strong>: Het opgegeven VU-net-ID is niet geldig.' ) );
+    }
+    
+    return $errors;
+}
+
+add_filter( 'registration_errors', 'check_vu_net_id_wp_login_register', 10, 3 );
+
 
 // Laat "VU-net-ID" zien op de registreren pagina
 add_filter( 'wpmem_register_form', 'gebruik_vunetid_ipv_gebruikersnaam', 10, 4 );
